@@ -6,7 +6,7 @@ SOPS doesn't encrypt anything by it's nature but it uses external encryption too
 
 On kubernetes (for example EKS) we could use [SOPS operator](https://github.com/craftypath/sops-operator), it will automatically decrypt applied encrypted data.
 
-### List solutions which I found:
+### List of other solutions which I found:
 - [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets). This one encrypts the whole file in comparison with SOPS but provides native kubernetes controller for secret decryption.
 - [git-crypt](https://github.com/AGWA/git-crypt). Seems that this tool supports only GPG for encryption. Also this tool encrypts whole files in specified paths of repository.
 
