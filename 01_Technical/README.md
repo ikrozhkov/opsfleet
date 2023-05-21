@@ -28,7 +28,7 @@ k expose deployment -n project-2 server-app --port 80
 
 Initially Istio will be preconfigured in `PERMISSIVE` mode, which means if both participant of connection have sidecars then connection between pods will be secured, even if initiall request was in plain HTTP. But if sender or receiver POD doesn't have sidecar then connection still be established.
 
-But if we would like to enable mTLS for all traffic for pods in the namespace `project-2` we should enable `PeerAuthentication` with `STRICT` mode
+In case if we would like to enable mTLS for all traffic for pods in the namespace `project-2` we should enable `PeerAuthentication` with `STRICT` mode
 
 ```yaml
 k apply -n project-2 -f - <<EOF
