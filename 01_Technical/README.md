@@ -18,7 +18,7 @@ k run client-1 --image nginx -n project-1
 k run client-2 --image nginx -n project-1 --labels sidecar.istio.io/inject="true"
 ```
 
-Secondly in the `project-2` namespace I've run a pod to which will act as a server
+Secondly in the `project-2` namespace I've run a pod which will act as a server
 ```
 k create ns project-2
 k label namespace project-2 istio-injection=enabled
