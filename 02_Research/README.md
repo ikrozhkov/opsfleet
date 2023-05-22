@@ -10,3 +10,20 @@ On kubernetes (for example EKS) we could use [SOPS operator](https://github.com/
 - [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets). This one encrypts the whole file in comparison with SOPS but provides native kubernetes controller for secret decryption.
 - [git-crypt](https://github.com/AGWA/git-crypt). Seems that this tool supports only GPG for encryption. Also this tool encrypts whole files in specified paths of repository.
 
+___
+
+## Secrets in AWS Secret Manager
+
+If the requirement is to store secrets in AWS Secret Manager and mount then to the EKS cluster's PODs I would suggest to use [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) and [AWS provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) for it.
+
+As prerequisite we'll need an IAM policy with permissions to retrieve a secret from the Secrets Manager and Service Account associated with that IAM policy. In the namespace where is the POD with mounted secret located we should also create `SecretProviderClass` Object.
+
+The detailed instructions described on [AWS documentation page](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html)
+
+## Secrets in Hashicorp Vault
+
+Similar to AWS Secret Manager approach we could use [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) and [Vault provider](https://github.com/hashicorp/vault-csi-provider)
+
+The flow will be pretty similar but `SecretProviderClass` Object will be configured slightly different. The official guide is located [here](https://developer.hashicorp.com/vault/docs/platform/k8s/csi) 
+
+Alternatively we can use [Vault Agent](https://developer.hashicorp.com/vault/docs/platform/k8s/injector) sidecar containers that render Vault secrets to a shared memory volume. But this approach is vendor-specific opposed to `Secrets Store CSI Driver`.
