@@ -14,7 +14,7 @@ ___
 
 ## Secrets in AWS Secret Manager
 
-If the requirement is to store secrets in AWS Secret Manager and mount then to the EKS cluster's PODs I would suggest to use [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) and [AWS provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) for it.
+If the requirement is to store secrets in AWS Secret Manager and then mount to the EKS cluster's PODs I would suggest to use [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) and [AWS provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) for it.
 
 As prerequisite we'll need an IAM policy with permissions to retrieve a secret from the Secrets Manager and Service Account associated with that IAM policy. In the namespace where is the POD with mounted secret located we should also create `SecretProviderClass` Object.
 
